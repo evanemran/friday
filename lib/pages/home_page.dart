@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
   void sendRequest(RequestModel requestModel) async {
     Message message = await Manager().chat(requestModel);
     setState(() {
+      list.removeLast();
       list.add(message);
     });
     scrollToBottom();
@@ -83,6 +84,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                 Message ownMessage = Message(text, 0);
                 setState(() {
                   list.add(ownMessage);
+                  list.add(Message("Getting response...", 3));
                 });
                 scrollToBottom();
                 sendRequest(RequestModel(query: text, key: AppStrings.apiKey, unit: "1674369275094"));

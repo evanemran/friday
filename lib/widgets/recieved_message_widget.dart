@@ -5,6 +5,8 @@ import 'package:friday/widgets/triangle_widget.dart';
 
 import 'dart:math' as math;
 
+import 'package:progress_indicators/progress_indicators.dart';
+
 class ReceivedMessage extends StatelessWidget {
   const ReceivedMessage({
     Key? key, required this.message,
@@ -43,10 +45,11 @@ class ReceivedMessage extends StatelessWidget {
                   children: [
                     AnimatedTextKit(animatedTexts: [
                       TyperAnimatedText(message.toString(),
-                       textStyle: const TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontSize: 16),)
+                        textStyle: const TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontSize: 16),)
                     ],
-                    totalRepeatCount: 1,
-                    displayFullTextOnTap: true,),
+                      totalRepeatCount: 1,
+                      displayFullTextOnTap: true,),
+
                     /*Text(
                       message.toString(),
                       style: const TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontSize: 16),
@@ -61,10 +64,18 @@ class ReceivedMessage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 50.0, left: 18, top: 5, bottom: 5),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: 30),
-          messageTextGroup,
+          Visibility(visible: message=="Getting response...", child: Wrap(
+            children: [
+              JumpingDotsProgressIndicator(
+                fontSize: 30.0,
+                color: Colors.purple,
+              )
+            ],
+          )),
+          Visibility(visible: message!="Getting response...", child: messageTextGroup),
         ],
       ),
     );
