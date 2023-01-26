@@ -5,6 +5,7 @@ import 'package:friday/requests/request_manager.dart';
 import '../constants/strings.dart';
 import '../models/message.dart';
 import '../widgets/bottom_bar_widget.dart';
+import '../widgets/drawer_widget.dart';
 import '../widgets/recieved_message_widget.dart';
 import '../widgets/sent_message_widget.dart';
 
@@ -52,18 +53,19 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text("Friday"),
         centerTitle: true,
       ),
+      drawer: const DrawerWidget(),
       body: Container(
         margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        color: Colors.white,
+        color: Colors.black,
         child: Column(
           children: [
             Expanded(child: ListView.builder(
                 controller: scrollController,
-                physics: const BouncingScrollPhysics(),
                 itemCount: list.length,
                 itemBuilder: (context, position) {
                   var item = list[position];
@@ -87,7 +89,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                   list.add(Message("Getting response...", 3));
                 });
                 scrollToBottom();
-                sendRequest(RequestModel(query: text, key: AppStrings.apiKey, unit: "1674369275094"));
+                sendRequest(RequestModel(text));
               },),
             )
           ],

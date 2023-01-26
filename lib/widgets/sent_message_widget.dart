@@ -18,7 +18,7 @@ class SentMessage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
-                  color: AppColors.bluTrans,
+                  color: AppColors.grey,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
@@ -31,13 +31,13 @@ class SentMessage extends StatelessWidget {
                   children: [
                     Text(
                       message.toString(),
-                      style: const TextStyle(color: Colors.black, fontFamily: 'Montserrat', fontSize: 16),
+                      style: const TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontSize: 16),
                     ),
                   ],
                 ),
               ),
             ),
-            CustomPaint(painter: Triangle(AppColors.bluTrans)),
+            CustomPaint(painter: Triangle(AppColors.grey)),
           ],
         ));
 

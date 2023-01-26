@@ -1,21 +1,24 @@
 class RequestModel {
-  String? query;
-  String? key;
-  String? unit;
+  String? model = "text-davinci-002";
+  String? prompt;
+  int? temperature = 0;
+  int? maxTokens = 4000;
 
-  RequestModel({this.query, this.key, this.unit});
+  RequestModel(this.prompt);
 
   RequestModel.fromJson(Map<String, dynamic> json) {
-    query = json['query'];
-    key = json['key'];
-    unit = json['unit'];
+    model = json['model'];
+    prompt = json['prompt'];
+    temperature = json['temperature'];
+    maxTokens = json['max_tokens'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['query'] = this.query;
-    data['key'] = this.key;
-    data['unit'] = this.unit;
+    data['model'] = this.model;
+    data['prompt'] = this.prompt;
+    data['temperature'] = this.temperature;
+    data['max_tokens'] = this.maxTokens;
     return data;
   }
 }

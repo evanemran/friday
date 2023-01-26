@@ -21,6 +21,12 @@ class ReceivedMessage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            CircleAvatar(
+              radius: 12,
+              backgroundColor: AppColors.mainColor,
+              child: Center(child: Image.asset("assets/ai.png", width: 12, height: 12, color: Colors.white,),),
+            ),
+            const SizedBox(width: 8,),
             Transform(
               alignment: Alignment.center,
               transform: Matrix4.rotationY(math.pi),
@@ -43,17 +49,19 @@ class ReceivedMessage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AnimatedTextKit(animatedTexts: [
-                      TyperAnimatedText(message.toString(),
+                    /*AnimatedTextKit(animatedTexts: [
+                      TyperAnimatedText(message.toString().replaceAll("\n", ""),
                         textStyle: const TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontSize: 16),)
                     ],
+                      isRepeatingAnimation: false,
                       totalRepeatCount: 1,
-                      displayFullTextOnTap: true,),
+                      displayFullTextOnTap: true,),*/
 
-                    /*Text(
-                      message.toString(),
+                    Text(
+                      message.toString().replaceAll("\n", ""),
+                      // message.toString().substring(message.lastIndexOf("\n")),
                       style: const TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontSize: 16),
-                    ),*/
+                    ),
                   ],
                 ),
               ),
@@ -62,7 +70,7 @@ class ReceivedMessage extends StatelessWidget {
         ));
 
     return Padding(
-      padding: const EdgeInsets.only(right: 50.0, left: 18, top: 5, bottom: 5),
+      padding: const EdgeInsets.only(right: 50.0, left: 8, top: 5, bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -71,7 +79,7 @@ class ReceivedMessage extends StatelessWidget {
             children: [
               JumpingDotsProgressIndicator(
                 fontSize: 30.0,
-                color: Colors.purple,
+                color: AppColors.mainColor,
               )
             ],
           )),

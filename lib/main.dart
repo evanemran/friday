@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:friday/pages/home_page.dart';
+import 'package:friday/styles/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Friday',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: AppColors.mainColor,
       ),
       home: const HomePage(),
     );

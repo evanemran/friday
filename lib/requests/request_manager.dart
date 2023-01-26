@@ -12,6 +12,7 @@ class Manager {
 
   var headers = {
     'Content-Type': 'application/json',
+    'Authorization': "Bearer ${AppStrings.apiKey}",
   };
 
   Future<Message> chat(RequestModel requestModel) async {
@@ -26,7 +27,7 @@ class Manager {
       ServerResponse serverResponse = ServerResponse.fromJson(
           jsonDecode(response.body));
 
-      return Message(serverResponse.text.isEmpty ? "I can't process this!" : serverResponse.text, 1);
+      return Message(serverResponse.choices![0].text.toString().isEmpty ? "I can't process this!" : serverResponse.choices![0].text.toString(), 1);
     } else {
       AppToast().showToast('Failed to connect!', true);
       throw Exception('Failed to connect!');
