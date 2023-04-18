@@ -40,6 +40,7 @@ dependencies:
   fluttertoast: ^8.0.9
   animated_text_kit: ^4.2.2
   progress_indicators: ^1.0.0
+  flutter_highlight: ^0.7.0
 
 dev_dependencies:
   flutter_test:

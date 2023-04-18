@@ -25,7 +25,7 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
             margin: const EdgeInsets.all(0),
             padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.black,
                 border: Border.all(color: AppColors.mainColor),
                 borderRadius: const BorderRadius.all(Radius.circular(50))
             ),
@@ -37,12 +37,12 @@ class _BottomBarWidgetState extends State<BottomBarWidget> {
                   onChanged: (text) {
 
                   },
-                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                  style: const TextStyle(color: Colors.white, fontSize: 18),
                   decoration: InputDecoration.collapsed(
                       filled: true,
-                      hintStyle: TextStyle(color: Colors.grey[800], fontSize: 18),
+                      hintStyle: TextStyle(color: Colors.white54, fontSize: 18),
                       hintText: "Message",
-                      fillColor: Colors.white70),
+                      fillColor: Colors.black),
 
                 ),),
                 // IconButton(onPressed: () {}, icon: const Icon(Icons.attachment, color: Colors.blueGrey,),),

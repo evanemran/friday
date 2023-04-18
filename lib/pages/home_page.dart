@@ -55,8 +55,16 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("Friday"),
+        title: Row(children: [Image.asset("assets/foxy.png", height: 30, width: 30,), const SizedBox(width: 10,), const Text("Foxy")],),
         centerTitle: true,
+        actions: [
+          IconButton(onPressed: () {
+            setState(() {
+              list.clear();
+              list.add(Message("How can I help you?", 1));
+            });
+          }, icon: Image.asset("assets/reload.png", height: 20, width: 20, color: Colors.white,))
+        ],
       ),
       drawer: const DrawerWidget(),
       body: Container(
