@@ -21,6 +21,8 @@ class Manager {
         headers: headers,
         body: json.encode(requestModel.toJson()));
 
+    print(json.encode(requestModel.toJson()));
+
     if (response.statusCode == 200) {
       print(response.toString());
 

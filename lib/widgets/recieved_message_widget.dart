@@ -27,13 +27,13 @@ class ReceivedMessage extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 12,
-          backgroundColor: AppColors.mainColor,
+          backgroundColor: Colors.transparent,
           child: Center(
             child: Image.asset(
               "assets/foxy.png",
-              width: 12,
-              height: 12,
-              color: Colors.white,
+              width: 20,
+              height: 20,
+              // color: Colors.transparent,
             ),
           ),
         ),
