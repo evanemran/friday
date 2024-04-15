@@ -4,8 +4,10 @@ import 'package:friday/constants/strings.dart';
 import 'package:friday/models/request_model.dart';
 import 'package:friday/models/message.dart';
 import 'package:friday/models/server_response.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:http/http.dart' as http;
 
+import '../constants/GenAIConfig.dart';
 import '../styles/app_toast.dart';
 
 class Manager {
@@ -14,6 +16,17 @@ class Manager {
     'Content-Type': 'application/json',
     'Authorization': "Bearer ${AppStrings.apiKey}",
   };
+
+  var model = GenerativeModel(
+    model: 'gemini-pro',
+    apiKey: GenAIConfig.geminiApiKey,
+  );
+
+  ChatSession? chatSession;
+
+  void initChat() {
+    chatSession = model.startChat();
+  }
 
   Future<Message> chat(RequestModel requestModel) async {
     final uri = Uri.parse(AppStrings.chat);
@@ -35,4 +48,16 @@ class Manager {
       throw Exception('Failed to connect!');
     }
   }
+
+  Future<Message> geminiChat(String prompt) async {
+
+    // final content = [Content.text(prompt)];
+    final content = Content.text(prompt);
+
+    final response = await chatSession!.sendMessage(content);
+
+    return Message(response.text.toString(), 1);
+  }
+
+
 }

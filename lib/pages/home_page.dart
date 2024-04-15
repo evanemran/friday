@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:friday/models/request_model.dart';
 import 'package:friday/requests/request_manager.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:provider/provider.dart';
 
+import '../constants/GenAIConfig.dart';
 import '../constants/strings.dart';
+import '../main.dart';
 import '../models/message.dart';
+import '../util/dark_theme_provider.dart';
 import '../widgets/bottom_bar_widget.dart';
 import '../widgets/drawer_widget.dart';
 import '../widgets/recieved_message_widget.dart';
 import '../widgets/sent_message_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, required this.isDarkChecked}) : super(key: key);
+
+  final Function(bool) isDarkChecked;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -38,11 +45,13 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      Manager().initChat();
     });
   }
 
   void sendRequest(RequestModel requestModel) async {
-    Message message = await Manager().chat(requestModel);
+    // Message message = await Manager().chat(requestModel);
+    Message message = await Manager().geminiChat(requestModel.prompt!);
     setState(() {
       list.removeLast();
       list.add(message);
@@ -52,6 +61,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -63,13 +73,22 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
               list.clear();
               list.add(Message("How can I help you?", 1));
             });
-          }, icon: Image.asset("assets/reload.png", height: 20, width: 20, color: Colors.white,))
+          }, icon: Image.asset("assets/reload.png", height: 20, width: 20, color: Colors.white,)),
+
+
+          /*Switch(
+            value: isDarkMode,
+            onChanged: (value) {
+              // widget.isDarkChecked.call(value);
+              themeChange.darkTheme = value;
+            },
+          )*/
         ],
       ),
       drawer: const DrawerWidget(),
       body: Container(
         margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-        color: Colors.black,
+        // color: Colors.black,
         child: Column(
           children: [
             Expanded(child: ListView.builder(
